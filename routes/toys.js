@@ -65,7 +65,7 @@ router.post("/", auth, async(req,res) => {
     }
     try {
       const toy = new ToysModel(req.body);
-      toy.user_id = req.tokenData._id; // -> רק המשתמש יוכל למחוק את המוצר לפי טוקן
+      toy.user_id = req.tokenData._id; // -> Only the user will be able to delete the product by token
       await toy.save();
       res.status(201).json(toy)
     }
@@ -87,7 +87,7 @@ router.put("/:idEdit", async(req,res) => {
     try {
       let idEdit = req.params.idEdit;
       let data;
-      // -> אדמין יכול לערוך אחרת צריך להיות משתמש של הטוקן
+      // -> Admin can edit user Regular must be a user of the token
       if(req.tokenData.role == "admin"){
         data = await ToysModel.updateOne({_id:idEdit},req.body);
       }
@@ -107,7 +107,7 @@ router.delete("/:idDel",auth ,async(req,res) => {
     try {
       let idDel = req.params.idDel;
       let data;
-      // -> אדמין יכול למחוק אחרת צריך להיות משתמש של הטוקן
+      // -> Admin can delele user Regular must be a user of the token
       if(req.tokenData.role == "admin"){
         data = await ToysModel.deleteOne({_id:idDel}); 
       }

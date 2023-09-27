@@ -11,12 +11,10 @@ require("./db/mongoConnect");
 
 const app = express();
 
-// מאפשר לכל הדומיינים לעשות אלינו בקשה
+
 app.use(cors());
 
 app.use(fileUpload({
-  // 1024 BYTES * 1024 KB = 1 MB
-  // הגבלה ל5 מב לקובץ אחד שעולה
   limits:{fileSize: 1024 * 1024 * 5}
 }))
 
@@ -29,7 +27,5 @@ routesInit(app);
 
 
 const server = http.createServer(app);
-// בודק באיזה פורט להריץ את השרת  , אם בשרת אמיתי אוסף
-// את המשתנה פורט מהסביבת עבודה שלו ואם לא 3001
 const port = process.env.PORT || 3001;
 server.listen(port);

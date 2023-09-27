@@ -22,7 +22,7 @@ router.get("/myInfo", auth ,async(req,res) => {
 })
 
 
-// הוספת משתמש
+// add user
 router.post("/", async(req,res) => {
   const validBody = validateUser(req.body)
   if(validBody.error){

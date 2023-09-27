@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// פונקציית מיידלוואר
+// Maidelwar function
 exports.auth = async(req,res,next) => {
   const token = req.header("x-api-key");
   if(!token){
@@ -10,7 +10,7 @@ exports.auth = async(req,res,next) => {
 
   try{
     const decodeToken = jwt.verify(token,process.env.TOKEN_SECRET);
-    // -> req = אותו ריק שיש לנו בקובץ יוזר
+    // -> req = The same req that we have in the file user
     req.tokenData = decodeToken;
     next()
   }

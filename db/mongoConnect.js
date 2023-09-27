@@ -10,9 +10,9 @@ async function main() {
 
    await mongoose.connect('mongodb+srv://zvikidzll01:1234zviki@cluster0.kqh8dtn.mongodb.net/toy11');
 
-
+   console.log("mongo atlas connect");
    
  // await mongoose.connect(process.env.DB_CONNECT);
  
-  console.log("mongo atlas connect");
+ 
 }
