@@ -4,17 +4,16 @@ const { auth } = require("../middlewares/auth");
 const router = express.Router();
 
 
-// -> localhost:3001/toys?page=3&parPeg=12&sort=price
+// -> localhost:3001/toys?page=3&perpage=12&sort=price
 router.get("/", async(req,res) => {
-    const parPeg = req.query.parPeg ? Math.min(req.query.parPeg, 5) : 3;
+    const perpage = req.query.perpage ? Math.min(req.query.perpage, 5) : 3;
     const page = req.query.page ? req.query.page -1 : 0;
     const sort = req.query.sort || "_id";
-
     try{
       let data = await ToysModel
       .find({})
-      .limit(parPeg)
-      .skip(page*parPeg)
+      .limit(perpage)
+      .skip(page*perpage)
       .sort({[sort]:1})
 
 
@@ -57,7 +56,8 @@ router.get("/single/:id", async(req,res) => {
     }
   })
 
-
+  
+// add prodect
 router.post("/", auth, async(req,res) => {
     let validBody = validateToys(req.body);
     if(validBody.error) {
